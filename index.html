@@ -23,13 +23,27 @@
     <title>JS Array Carousel with Objects</title>
 
 </head>
-<body>
+<body class="bg-dark">
 
     <main>
         <div class="container-fluid p-5" id="app">
-            <div class="row text-center">
-                <div class="col-12 p-5">
-                
+            <div class="row text-white">
+                <div class="col-12 px-5">
+                    <h1>To Do List</h1>
+                </div>
+                <div class="col-7 mx-auto">
+                    <div class="input-group mb-3">
+                        <input type="text" v-model="content" class="form-control me-2 rounded shadow-none" placeholder="Somthing you wanna do...">
+                        <button type="button" class="btn btn-primary rounded shadow-none" @click="addItem(content)">Add</button>
+                    </div>
+                    <div class="listWrapper mt-4">
+                        <ul class="list-unstyled">
+                            <li v-for="(element,index) in todoList" class="p-2 mb-1 rounded d-flex justify-content-between align-items-center">
+                                {{element.text}}
+                                <span><i class="fa-solid fa-xmark" @click="removeItem(index)"></i></span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
     </main>
