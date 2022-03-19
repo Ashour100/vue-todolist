@@ -1,9 +1,12 @@
+// Lo Scopo del bonus: Cambiare il modo in cui la lista viene ordinata
+
 const app= new Vue({
     el:'#app',
     data:{
         content:"",
-        listCount:'0',
-        todoList:[]
+        todoList:[],
+        reverseTodo:[],
+        doneList:[]
     },
     methods:{
         addItem: function(content){
@@ -13,18 +16,34 @@ const app= new Vue({
                     done:false
                 });
                 this.content="";
-                this.listCount++;
+                this.reverseTodo=this.todoList.slice().reverse();
+                console.log(this.reverseTodo);
             }
             else
                 alert('Write somthing');
         },
-        removeItem: function(index){
-            this.todoList.splice(index,1);
-            this.listCount--;
+        removeItemFromUnDone: function(index){
+            this.reverseTodo.splice(index,1);
+            this.todoList=this.reverseTodo.slice().reverse();
         },
-        statusUpdate: function(index){
-            if(this.listCount>=1)
-            this.todoList[index].done=!this.todoList[index].done;
-        }
-        }
+        removeItemFromDone: function(index){
+            this.doneList.splice(index,1);
+        },
+        statusUpdateFromUnDone:function(index){
+            this.doneList.push({
+                text:this.reverseTodo[index].text,
+                done:true
+            });
+            this.reverseTodo.splice(index,1);
+            this.todoList=this.reverseTodo.slice().reverse();
+        },
+        statusUpdateFromDone: function(index){
+            this.todoList.push({
+                text:this.doneList[index].text,
+                done:false
+            });
+            this.doneList.splice(index,1);
+            this.reverseTodo=this.todoList.slice().reverse();
+        },
+    }
 })
