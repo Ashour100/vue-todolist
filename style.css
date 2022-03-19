@@ -5,3 +5,9 @@ i:hover{
     cursor: pointer;
     color: rgb(204, 3, 3);
 }
+.done{
+    text-decoration-line: line-through;
+}
+span{
+    cursor: pointer;
+}
